@@ -2,8 +2,13 @@ const subsetsWithDup = function (nums){
     const res = []
 
     const calc = function(answer, nums) {
-        if(nums.length === 0){
-            res.push(answer)
+        if(nums.length === 0 ){
+            if(res.length>0 && answer.toString() !== res[res.length-1].toString()){
+                res.push(answer)
+            }
+            else if(res.length === 0){
+                res.push(answer)
+            }
             return
         }
         let take = [...answer, nums[0]]
@@ -13,6 +18,7 @@ const subsetsWithDup = function (nums){
         calc( take, nums)
         calc(ignore, nums)
     }
+    nums.sort((a, b) => a-b)
     calc([], nums)
     return res
 }
@@ -37,4 +43,5 @@ const subsetsWithDub2 = function (nums){
 }
 
 console.log(subsetsWithDub2([1, 2, 2]));
+console.log(subsetsWithDup([1, 2, 2]));
 console.log(subsetsWithDup([0]));

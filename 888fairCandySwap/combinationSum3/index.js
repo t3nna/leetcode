@@ -52,5 +52,26 @@ const combinationSum3 = function(k, n) {
     return res
 };
 
-console.log(combinationSum3(k = 9, n = 45));
-console.log(combinationSum3(k = 3, n = 9));
+
+const combinationSum301 = function(k, n) {
+    const res = []
+
+    function permute(arr, sum, start) {
+        if(sum > n) return;
+
+        if(arr.length === k) {
+            if(sum === n) res.push(arr);
+            return;
+        }
+
+        for(let i = start; i < 10; i++) {
+            permute([...arr, i], sum+i, i+1);
+        }
+    }
+    permute([], 0, 1);
+    return res;
+};
+
+// console.log(combinationSum3(k = 9, n = 45));
+// console.log(combinationSum301(k = 9, n = 45));
+console.log(combinationSum301(k = 3, n = 9));
