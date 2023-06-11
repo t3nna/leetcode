@@ -74,24 +74,24 @@ function findAndReplacePattern(words, pattern) {
 }*/
 
 
-var findAndReplacePattern = function(words, pattern) {
-    let list = []
-    for(let word of words){
-        let p = new Array(26).fill(0)
-        let w = new Array(26).fill(0)
-        let same = true
-        for(let i=0; i<word.length; i++){
-            if(w[word.charCodeAt(i)] != p[pattern.charCodeAt(i)]){
-                same = false
-                break
-            } else{
-                w[word.charCodeAt(i)] = p[pattern.charCodeAt(i)] = i+1
-            }
-        }
-        if(same)    list.push(word)
-    }
-    return list
+const findAndReplacePattern01 = function (words, pattern) {
+    let compare = convert(pattern)
+    return words.filter(item => {
+        let converted = convert(item)
+        return converted === compare
+    })
 };
 
-console.log(findAndReplacePattern(["abc", "deq", "mee", "aqq", "dkd", "ccc"], "abb"));
-console.log(findAndReplacePattern(["a", "b", "c"], "a"));
+function convert (str){
+    let res = ''
+    for (let i = 0; i < str.length; i++) {
+       res+=str.indexOf(str.charAt(i))
+    }
+    return res
+}
+// convert('abcb')
+
+
+
+console.log(findAndReplacePattern01(["bbb","abc", "eeq", "mee", "aqq", "dkd", "ccc"], "abb"));
+// console.log(findAndReplacePattern01(["a", "b", "c"], "a"));
